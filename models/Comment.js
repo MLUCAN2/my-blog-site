@@ -13,6 +13,15 @@ Comment.init(
             primaryKey: true,
             autoIncrement: true,
         },
+        date_created:
+        {
+            type: DataTypes.DATE,
+            allowNull: false,
+            validate: 
+            {
+                isDate: true
+            }
+        },
         content:
         {
             type: DataTypes.STRING,

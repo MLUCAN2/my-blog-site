@@ -22,6 +22,15 @@ Post.init(
                 len: [3]
             }
         },
+        date_created:
+        {
+            type: DataTypes.DATE,
+            allowNull: false,
+            validate: 
+            {
+                isDate: true
+            }
+        },
         content:
         {
             type: DataTypes.TEXT,
