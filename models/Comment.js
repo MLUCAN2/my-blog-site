@@ -30,7 +30,7 @@ Comment.init(
                 notEmpty: true,
             }
         },
-        userId:
+        user_id:
         {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -39,7 +39,7 @@ Comment.init(
                 key: 'id'
             }
         },
-        postId:
+        post_id:
         {
             type: DataTypes.INTEGER,
             allowNull: false,

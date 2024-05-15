@@ -40,7 +40,7 @@ Post.init(
                 len: [10]
             }
         },
-        userId: 
+        user_id: 
         {
             type: DataTypes.INTEGER,
             references: 
