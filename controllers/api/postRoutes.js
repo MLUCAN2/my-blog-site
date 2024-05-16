@@ -8,11 +8,9 @@ router.post('/post', async (req,res)=> {
     }
     try {
         const newPost= await Post.create({
+            title: req.body.title,
             content: req.body.content,
-            username: req.body.username,
-            post_id: req.body.post_id,
             user_id: req.session.user_id,
-            date_created: req.body.date_created
         });
         res.status(200).json(newPost);
     }

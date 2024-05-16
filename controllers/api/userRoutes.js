@@ -1,4 +1,4 @@
-const router= require('express').Router;
+const router= require('express').Router ();
 const {User}= require('../../models')
 
 // Create a new user
@@ -19,22 +19,12 @@ router.post('/createUser', async (req,res)=> {
             res.status(400).json({message: 'User already exists'})
             return;
         }
-        
-        // Validate the entered password
-        const validPassword = await userData.checkPassword(req.body.password);
-        console.log(validPassword);
-        if (!validPassword) {
-            res
-                .status(400)
-                .json({ message: 'Incorrect password, please try again' });
-            return;
-        }
-        
+      
         // Create the actual user
         const newUser= await User.create ({
             username: req.body.username,
             email: req.body.email,
-            password:  await userData.hashPassword(req.body.password)
+            password: req.body.password
         });
 
         req.session.save(()=> {

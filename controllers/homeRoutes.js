@@ -1,5 +1,6 @@
 // The home routes are what send the HTML to users 
 const express= require('express');
+const router= express.Router();
 const {User, Post, Comment}= require('../models')
 
 // Get and render posts to homepage
