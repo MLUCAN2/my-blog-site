@@ -15,6 +15,7 @@ router.post('/post', async (req,res)=> {
         res.status(200).json(newPost);
     }
     catch (err) {
+        console.error('Error on post route', err)
         res.status(400).json(err);
     }
 });

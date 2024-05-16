@@ -7,21 +7,17 @@ const {User, Post, Comment}= require('../models')
 router.get('/', async (req,res)=> {
     try {
         const postData= await Post.findAll({
-            include: [
-                {
-                    model: User
-                },
-                {
+            include: [User, {
                     model: Comment,
                     include: [User]
                 }
             ]
         });
         const posts = postData.map((post)=> post.get({plain: true}))
-        res.render('homepage', {posts});
-        res.status(200).json(postData);
+        res.render('homepage', {posts: posts.length ? posts: null});
     }
     catch(err) {
+        console.error('Could not get users', err)
         res.status(500).json(err)
     }
 });
@@ -33,6 +29,7 @@ router.get('/user/:id', async (req,res)=> {
         res.status(200).json(userData)
     }
     catch(err) {
+        console.error('Could not get user', err)
         res.status(500).json(err)
     }
 });
@@ -54,6 +51,7 @@ router.get('/signup', (req,res)=> {
         return;
     }
     res.render('signup');
+
 });
 
 module.exports= router;

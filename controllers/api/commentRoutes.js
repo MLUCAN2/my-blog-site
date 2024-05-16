@@ -15,6 +15,7 @@ router.post('/comment', async (req,res)=> {
         res.status(200).json(newComment);
     }
     catch (err) {
+        console.error('Error on comment route', err)
         res.status(400).json(err);
     }
 });
