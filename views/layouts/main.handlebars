@@ -5,17 +5,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
-  <title>Your Story</title>
+  <title>The Tech Blog</title>
 </head>
 
 <body>
   <header class="header-container">
-    <h1>Your Story</h1>
+    <h1>The Tech Blog</h1>
     <nav class="header-nav">
     <a href="/">Homepage  |</a>
+    <a href="/dashboard">Dashboard |</a>
     {{#if logged_in}}
     <a id="logout" class="logout-btn">Logout |</a>
-    <a href="/profile">Dashboard |</a>
      {{else}}
     <a href="/login">Login</a>
     {{/if}}
@@ -30,7 +30,6 @@
   {{#if logged_in}}
   <script src="/js/logout.js"></script>
   {{/if}}
-
 </body>
 
 </html>

@@ -23,9 +23,49 @@
 
 .post-card{
     width: 60%;
-    
     box-shadow: 0 4px 6px black;
 }
 body{
 
+}
+
+/* login-signup */
+.login-signup-container{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.login-container, .signup-container{
+    border: 3px solid black;
+    margin: 5px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.form-data{
+    margin-bottom: 10px;
+}
+
+.form-input{
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+label{
+    display: block;
+    margin-bottom: 5px;
+}
+
+button{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: black;
+    color: white;
 }

@@ -1,7 +1,8 @@
 // The home routes are what send the HTML to users 
 const express= require('express');
 const router= express.Router();
-const {User, Post, Comment}= require('../models')
+const {User, Post, Comment}= require('../models');
+const withAuth = require('../../tech-portfolio-site/utils/auth');
 
 // Get and render posts to homepage
 router.get('/', async (req,res)=> {
@@ -14,7 +15,7 @@ router.get('/', async (req,res)=> {
             ]
         });
         const posts = postData.map((post)=> post.get({plain: true}))
-        res.render('homepage', {posts: posts.length ? posts: null});
+        res.render('homepage',  {posts: posts.length ? posts: null});
     }
     catch(err) {
         console.error('Could not get users', err)
@@ -22,6 +23,38 @@ router.get('/', async (req,res)=> {
     }
 });
 
+router.get('/dashboard', async (req,res)=> {
+    if(!req.session.loggedIn){
+        res.redirect('/login');
+        return;
+    }
+    try {
+        const userPosts= await Post.findAll({
+            where:{ user_id: req.session.user_id},
+            include:[
+                {
+                    model: User,
+                    attributes:['username', 'email']
+                },
+                {
+                    model: Comment,
+                    include:[
+                        {
+                            model: User,
+                            attributes:['username']
+                        }
+                    ]
+                }
+            ]
+        });
+        const posts = userPosts.map((post)=> post.get({plain: true}));
+        res.render('dashboard', {posts});
+    }
+    catch(err) {
+        console.error('Could not get user posts', err)
+        res.status(500).json(err)
+    }
+})
 // Get user data by id
 router.get('/user/:id', async (req,res)=> {
     try {
@@ -45,7 +78,7 @@ router.get('/login', (req,res)=> {
 });
 
 // Handles the rendering for the signup page
-router.get('/signup', (req,res)=> {
+router.get('/signup', withAuth, (req,res)=> {
     if (req.session.loggedIn){
         res.redirect('/');
         return;
